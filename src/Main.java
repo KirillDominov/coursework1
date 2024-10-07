@@ -17,18 +17,18 @@ public class Main {
         employeesArr[7] = new Employee("Сокол Александр Александрович", 4, 80000);
         employeesArr[8] = new Employee("Баланчук Светлана Ринатовна", 5, 85000);
         employeesArr[9] = new Employee("Попова Александра Сергеевна", 5, 90000);
-        indexingTheSalary(employeesArr, 10);
+        indexingTheSalary(10);
         Random random = new Random();
         int departamentNumber = 1 + random.nextInt(5);
 
         int compareSalary = 55000 + random.nextInt(30001);
-        int minDepartmentSalary = findEmployeeDepartmentMinSalary(employeesArr, departamentNumber);
-        int maxDepartmentSalary = findEmployeeDepartmentMaxSalary(employeesArr, departamentNumber);
-        int totalDepartmentSalary = paidTotalSalaryDeparments(employeesArr, departamentNumber);
+        int minDepartmentSalary = findEmployeeDepartmentMinSalary(departamentNumber);
+        int maxDepartmentSalary = findEmployeeDepartmentMaxSalary(departamentNumber);
+        int totalDepartmentSalary = paidTotalSalaryDeparments(departamentNumber);
 
-        float averageDepartmentSalary = calculateAverageSalaryDepartment(employeesArr, departamentNumber);
-        indexingTheSalaryDepartment(employeesArr, departamentNumber, 2);
-        printListEmployeeDepartment(employeesArr, departamentNumber);
+        double averageDepartmentSalary = calculateAverageSalaryDepartment(departamentNumber);
+        indexingTheSalaryDepartment(departamentNumber, 2);
+        printListEmployeeDepartment(departamentNumber);
         System.out.println();
         printSalaryLessNumber(employeesArr, compareSalary);
         System.out.println();
@@ -36,7 +36,7 @@ public class Main {
 
     }
 
-    private static void indexingTheSalary(Employee[] employeesArr, int percent) {
+    private static void indexingTheSalary(int percent) {
         for (Employee employee : employeesArr) {
             int salary = employee.getSalaryMonth();
             int newSalary = salary + (salary * percent / 100);
@@ -45,7 +45,7 @@ public class Main {
 
     }
 
-    private static int findEmployeeDepartmentMinSalary(Employee[] employeesArr, int number) {
+    private static int findEmployeeDepartmentMinSalary( int number) {
         int minSalary = Integer.MAX_VALUE;
         for (Employee employee : employeesArr) {
             if (employee.getDepartment() == number && minSalary > employee.getSalaryMonth()) {
@@ -55,9 +55,9 @@ public class Main {
         return minSalary;
     }
 
-    private static int findEmployeeDepartmentMaxSalary(Employee[] employeesArr, int number) {
+    private static int findEmployeeDepartmentMaxSalary(int number) {
         int maxSalary = Integer.MIN_VALUE;
-        for (Employee employee : employeesArr) {
+        for (Employee employee : Main.employeesArr) {
             if (employee.getDepartment() == number && maxSalary < employee.getSalaryMonth()) {
                 maxSalary = employee.getSalaryMonth();
             }
@@ -65,7 +65,7 @@ public class Main {
         return maxSalary;
     }
 
-    private static int paidTotalSalaryDeparments(Employee[] employeesArr, int number) {
+    private static int paidTotalSalaryDeparments(int number) {
         int totalSalari = 0;
         for (Employee employee : employeesArr) {
             if (employee.getDepartment() == number) {
@@ -75,7 +75,7 @@ public class Main {
         return totalSalari;
     }
 
-    private static float calculateAverageSalaryDepartment(Employee[] employeesArr, int number) {
+    private static double calculateAverageSalaryDepartment(int number) {
         int sumSalary = 0;
         int count = 0;
         for (Employee employee : employeesArr) {
@@ -87,7 +87,7 @@ public class Main {
         return count > 0 ? (float) sumSalary / count : 0;
     }
 
-    private static void indexingTheSalaryDepartment(Employee[] employeesArr, int number, int percent) {
+    private static void indexingTheSalaryDepartment(int number, int percent) {
         for (Employee employee : employeesArr) {
             if (employee.getDepartment() == number) {
                 int salaryDepartment = employee.getSalaryMonth();
@@ -99,8 +99,8 @@ public class Main {
 
     }
 
-    private static void printListEmployeeDepartment(Employee[] employeeArr, int number) {
-        for (Employee employee : employeeArr) {
+    private static void printListEmployeeDepartment(int number) {
+        for (Employee employee : employeesArr) {
             if (employee.getDepartment() == number) {
                 System.out.println(employee);
             }
@@ -109,7 +109,7 @@ public class Main {
 
     private static void printSalaryLessNumber(Employee[] employeesArr, int num) {
         System.out.printf("Сотрудники у которых зп меньше %d:\n", num);
-        for (Employee employee : employeesArr) {
+        for (Employee employee : Main.employeesArr) {
             if (employee.getSalaryMonth() < num) {
                 System.out.println(employee);
             }
@@ -119,7 +119,7 @@ public class Main {
 
     private static void printSalaryGreaterNumber(Employee[] employeesArr, int num) {
         System.out.printf("Сотрудники у которых зп больше (или равно) %d:\n", num);
-        for (Employee employee : employeesArr) {
+        for (Employee employee : Main.employeesArr) {
             if (employee.getSalaryMonth() >= num) {
                 System.out.println(employee);
             }
